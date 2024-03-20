@@ -13,20 +13,21 @@ class ExportDelegate {
 
   ExportDelegate({this.options = const ExportOptions()});
 
-  final Map<String, ExportFrame> _registeredFrames = {};
+  final Map<String, ExportFrame> registeredFrames = {};
 
   /// Registers a new [ExportFrame] to the [ExportDelegate].
   void registerFrame(ExportFrame frame) {
-    _registeredFrames[frame.frameId] = frame;
+    registeredFrames[frame.frameId] = frame;
   }
+
   void unregisterFrame(String frameId) {
-    _registeredFrames.remove(frameId);
+    registeredFrames.remove(frameId);
   }
 
   /// Returns the [ExportFrame] with the given [frameId].
   /// Throws an [Exception] if no [ExportFrame] is found.
   ExportFrame getFrame(String frameId) {
-    final ExportFrame? frame = _registeredFrames[frameId];
+    final ExportFrame? frame = registeredFrames[frameId];
 
     if (frame == null) {
       throw Exception('No frame with id $frameId found');
@@ -43,7 +44,7 @@ class ExportDelegate {
   /// Exports the [ExportFrame] with the given [frameId] to a [pw.Document].
   Future<pw.Document> exportToPdfDocument(String frameId,
       {ExportOptions? overrideOptions}) async {
-    final ExportFrame? frame = _registeredFrames[frameId];
+    final ExportFrame? frame = registeredFrames[frameId];
 
     if (frame == null) {
       throw Exception('No frame with id $frameId found');

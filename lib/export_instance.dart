@@ -208,7 +208,9 @@ class ExportInstance {
           }
           Element? contextElement =
               findElement(context, (Checkbox e) => e.key == widget.key);
-          contextWidget = contextElement!.widget as Checkbox;
+          if (contextElement != null) {
+            contextWidget = contextElement!.widget as Checkbox;
+          }
         }
         return [
           await (widget as Checkbox)

@@ -19,6 +19,9 @@ class ExportDelegate {
   void registerFrame(ExportFrame frame) {
     _registeredFrames[frame.frameId] = frame;
   }
+  void unregisterFrame(String frameId) {
+    _registeredFrames.remove(frameId);
+  }
 
   /// Returns the [ExportFrame] with the given [frameId].
   /// Throws an [Exception] if no [ExportFrame] is found.
